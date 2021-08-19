@@ -1,0 +1,117 @@
+@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+
+html, body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+a, .btn-link {
+    color: #0366d6;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.content {
+    padding-top: 1.1rem;
+}
+
+.valid.modified:not([type=checkbox]) {
+    outline: 1px solid #26b050;
+}
+
+.invalid {
+    outline: 1px solid red;
+}
+
+.validation-message {
+    color: red;
+}
+
+#blazor-error-ui {
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+#blazor-error-ui .dismiss {
+    cursor: pointer;
+    position: absolute;
+    right: 0.75rem;
+    top: 0.5rem;
+}
+
+.evo-dash-container {
+    margin: 0 -1.2rem;
+}
+
+.evo-row-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.2rem;
+}
+
+.evo-dash-overview {
+    height: 80px;
+}
+
+.evo-dash-box {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #cbd2d6;
+    border-radius: 4px;
+    padding: .75rem 1rem;
+    margin: 0 .8rem;
+    box-shadow: 0 2px 4px 0px rgb(0 0 0 / 10%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.evo-dash-box-midle {
+    width: auto;
+}
+
+.evo-dash-box-icon {
+    font-size: 1.5rem;
+}
+
+.evo-dash-box-title {
+    font-size: .8rem;
+    color: #888;
+    text-align: right;
+}
+
+.evo-dash-box-count {
+    font-size: 1.5rem;
+    text-align: right;
+}
+
+.evo-dash-graf-container {
+    height: 350px;
+}
+
+.evo-dash-graf-title {
+    position: absolute;
+    top: .75rem;
+    left: 1rem;
+    font-size: 1rem;
+}
+
+.evo-dash-graf {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

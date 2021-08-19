@@ -1,0 +1,140 @@
+﻿@page "/"
+@using ChartJs.Blazor.PieChart
+
+<section class="evo-dash-container">
+    <div class="evo-row-flex evo-dash-overview">
+        <div class="evo-dash-box">
+            <div class="evo-dash-box-midle">
+                <div class="evo-dash-box-icon">
+                    <span class="oi oi-beaker"></span>
+                </div>
+            </div>
+            <div class="evo-dash-box-midle">
+                <div class="evo-dash-box-title">In Progress</div>
+                <div class="evo-dash-box-count">0</div>
+            </div>
+        </div>
+        <div class="evo-dash-box">
+            <div class="evo-dash-box-midle">
+                <div class="evo-dash-box-icon">
+                    <span class="oi oi-clock"></span>
+                </div>
+            </div>
+            <div class="evo-dash-box-midle">
+                <div class="evo-dash-box-title">Pending</div>
+                <div class="evo-dash-box-count">0</div>
+            </div>
+        </div>
+        <div class="evo-dash-box">
+            <div class="evo-dash-box-midle">
+                <div class="evo-dash-box-icon">
+                    <span class="oi oi-loop"></span>
+                </div>
+            </div>
+            <div class="evo-dash-box-midle">
+                <div class="evo-dash-box-title">Resubmit</div>
+                <div class="evo-dash-box-count">0</div>
+            </div>
+        </div>
+        <div class="evo-dash-box">
+            <div class="evo-dash-box-midle">
+                <div class="evo-dash-box-icon">
+                    <span class="oi oi-star"></span>
+                </div>
+            </div>
+            <div class="evo-dash-box-midle">
+                <div class="evo-dash-box-title">Published</div>
+                <div class="evo-dash-box-count">0</div>
+            </div>
+        </div>
+        <div class="evo-dash-box">
+            <div class="evo-dash-box-midle">
+                <div class="evo-dash-box-icon">
+                    <span class="oi oi-warning"></span>
+                </div>
+            </div>
+            <div class="evo-dash-box-midle">
+                <div class="evo-dash-box-title">Unpublished</div>
+                <div class="evo-dash-box-count">0</div>
+            </div>
+        </div>
+        <div class="evo-dash-box">
+            <div class="evo-dash-box-midle">
+                <div class="evo-dash-box-icon">
+                    <span class="oi oi-bell"></span>
+                </div>
+            </div>
+            <div class="evo-dash-box-midle">
+                <div class="evo-dash-box-title">Feedback</div>
+                <div class="evo-dash-box-count">0</div>
+            </div>
+        </div>
+    </div>
+    <div class="evo-row-flex evo-dash-graf-container">
+        <div class="evo-dash-box">
+            <div class="evo-dash-graf-title">Year To Date Articles</div>
+            <div class="evo-dash-graf">
+                
+            </div>
+        </div>
+        <div class="evo-dash-box">
+            <div class="evo-dash-graf-title">Top 5 Authors</div>
+            <div class="evo-dash-graf">
+               
+            </div>
+        </div>
+    </div>
+    <div class="evo-row-flex evo-dash-graf-container">
+        <div class="evo-dash-box">
+            <div class="evo-dash-graf-title">Views by Article</div>
+            <div class="evo-dash-graf">
+                <Chart Config="_config"></Chart>
+            </div>
+        </div>
+        <div class="evo-dash-box">
+            <div class="evo-dash-graf-title">Year To Date Views</div>
+            <div class="evo-dash-graf">
+
+            </div>
+        </div>
+        <div class="evo-dash-box">
+            <div class="evo-dash-graf-title">Articles by Year</div>
+            <div class="evo-dash-graf">
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+@code {
+    private PieConfig _config;
+
+    protected override void OnInitialized()
+    {
+        _config = new PieConfig
+        {
+            Options = new PieOptions
+            {
+                Responsive = true,
+                Title = new OptionsTitle
+                {
+                    Display = true,
+                    Text = "Views by article"
+                }
+            }
+        };
+
+        PieDataset<int> dataset = new PieDataset<int>(new[] { 6, 5, 3, 7 })
+        {
+            BackgroundColor = new[]
+            {
+                ColorUtil.ColorHexString(255, 99, 132), // Slice 1 aka "Red"
+                ColorUtil.ColorHexString(255, 205, 86), // Slice 2 aka "Yellow"
+                ColorUtil.ColorHexString(75, 192, 192), // Slice 3 aka "Green"
+                ColorUtil.ColorHexString(54, 162, 235), // Slice 4 aka "Blue"
+            }
+        };
+
+        _config.Data.Datasets.Add(dataset);
+    }
+}

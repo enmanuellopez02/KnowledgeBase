@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'KnowledgeBase' ">
+    <ExternalConsole>true</ExternalConsole>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.8" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.Authentication.WebAssembly.Msal" Version="5.0.8" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
+    <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
+    <PackageReference Include="ChartJs.Blazor.Fork" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Shared\KnowledgeBase.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ChartJs.Blazor" />
+    <None Remove="ChartJs.Blazor.Fork" />
+    <None Remove="Pages\User\" />
+    <None Remove="Pages\Articles\" />
+    <None Remove="Pages\Authentication\" />
+    <None Remove="Infraestructure\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Pages\User\" />
+    <Folder Include="Pages\Articles\" />
+    <Folder Include="Pages\Authentication\" />
+    <Folder Include="Infraestructure\" />
+  </ItemGroup>
+</Project>

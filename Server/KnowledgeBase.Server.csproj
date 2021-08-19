@@ -1,0 +1,56 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>KnowledgeBase.Server-15904C1B-A897-41BB-8633-B2468C397611</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="5.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.8" />
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.9.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Client\KnowledgeBase.Client.csproj" />
+    <ProjectReference Include="..\Shared\KnowledgeBase.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.8" NoWarn="NU1605" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="5.0.8" NoWarn="NU1605" />
+    <PackageReference Include="Microsoft.Identity.Web" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Identity.Web.UI" Version="1.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Extensions\" />
+    <None Remove="Models\" />
+    <None Remove="Services\" />
+    <None Remove="Interfaces\" />
+    <None Remove="Repositories\" />
+    <None Remove="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" />
+    <None Remove="Microsoft.EntityFrameworkCore.Sqlite" />
+    <None Remove="Persintence\" />
+    <None Remove="Configurations\" />
+    <None Remove="DTOs\" />
+    <None Remove="DTOs\UserProfile\" />
+    <None Remove="Settings\" />
+    <None Remove="Azure.Storage.Blobs" />
+    <None Remove="Middlewares\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+    <Folder Include="Models\" />
+    <Folder Include="Services\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="Repositories\" />
+    <Folder Include="Persistence\" />
+    <Folder Include="Configurations\" />
+    <Folder Include="DTOs\" />
+    <Folder Include="DTOs\UserProfile\" />
+    <Folder Include="Settings\" />
+    <Folder Include="Middlewares\" />
+  </ItemGroup>
+</Project>
