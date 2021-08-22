@@ -5,9 +5,8 @@ using System.IO;
 
 namespace KnowledgeBase.Shared.Models
 {
-    public class Article
+    public class Article : Entity
     {
-        public Guid ArticleId { get; set; }
         [Required]
         public string Title { get; set; }
 
@@ -17,18 +16,21 @@ namespace KnowledgeBase.Shared.Models
 
         [Required]
         public string Status { get; set; }
+
+        [Display(Name = "Created at")]
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public string FileName { get; set; }
         public string Url => Path.Combine("Storage", "Documentation", FileName);
 
-        [Required]
+        [Required, Display(Name = "Category")]
+        public string CategoryIdAsString { get; set; }
+
         public Guid CategoryId
         {
             get { return Guid.TryParse(CategoryIdAsString, out Guid g) ? g : default; }
             set { CategoryIdAsString = Convert.ToString(value); }
         }
-        public string CategoryIdAsString { get; set; }
         public Category Category { get; set; }
         
         public Guid UserProfileDetailId { get; set; }

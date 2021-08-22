@@ -1,10 +1,14 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+
 namespace KnowledgeBase.Shared.Models
 {
-    public class Feedback
+    public class Feedback : Entity
     {
-        public Guid FeedbackId { get; set; }
+        [Required]
         public string Helpful { get; set; }
+
+        [Required]
         public string Comments { get; set; }
         public DateTime CreatedAt { get; set; }
 

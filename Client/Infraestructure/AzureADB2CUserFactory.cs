@@ -28,12 +28,14 @@ namespace KnowledgeBase.Client.Infraestructure
                 using var httpClient = _httpClient.CreateClient("KnowledgeBase.ServerAPI");
                 var response = await httpClient.GetAsync("api/userprofiles");
 
-                if (response.IsSuccessStatusCode)
+                if (!response.IsSuccessStatusCode)
                 {
-                    var userProfile = await response.Content.ReadFromJsonAsync<UserProfileDetail>();
-                    var roleName = userProfile.IsAdmin ? "Admin" : "User";
-                    userIdentity.AddClaim(new Claim(ClaimTypes.Role, roleName));
+                    response = await httpClient.PostAsync("api/userprofiles", new StringContent(""));
                 }
+
+                var userProfile = await response.Content.ReadFromJsonAsync<UserProfileDetail>();
+                var roleName = userProfile.IsAdmin ? "Admin" : "User";
+                userIdentity.AddClaim(new Claim(ClaimTypes.Role, roleName));
             }
 
             return initialUser;

@@ -22,10 +22,6 @@ a, .btn-link {
     outline: 1px solid #26b050;
 }
 
-.invalid {
-    outline: 1px solid red;
-}
-
 .validation-message {
     color: red;
 }
@@ -114,4 +110,36 @@ a, .btn-link {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.evo-submenu-top {
+    margin: 10px 0;
+}
+
+.evo-submenu-top > .btn-link:first-child {
+    padding-left: 0;
+}
+
+.evo-submenu-top > .btn-link {
+    padding-right: 0;
+}
+
+.evo-submenu-top svg {
+    margin-right: 5px;
+}
+
+.evo-submenu-top > .form-group {
+    display: flex;
+    align-items: center;
+}
+
+.evo-submenu-top > .form-group > .control-label {
+    font-size: .9rem;
+    margin-right: .5rem;
+    margin-top: .375rem;
+}
+
+.evo-submenu-top > .form-group > .form-control {
+    width: auto;
+    font-size: .9rem;
 }

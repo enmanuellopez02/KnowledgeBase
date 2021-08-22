@@ -1,5 +1,5 @@
 ﻿using System;
-namespace KnowledgeBase.Server.Models
+namespace KnowledgeBase.Shared.Models
 {
     public class Entity
     {

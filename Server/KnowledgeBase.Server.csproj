@@ -34,8 +34,6 @@
     <None Remove="Microsoft.EntityFrameworkCore.Sqlite" />
     <None Remove="Persintence\" />
     <None Remove="Configurations\" />
-    <None Remove="DTOs\" />
-    <None Remove="DTOs\UserProfile\" />
     <None Remove="Settings\" />
     <None Remove="Azure.Storage.Blobs" />
     <None Remove="Middlewares\" />
@@ -48,8 +46,6 @@
     <Folder Include="Repositories\" />
     <Folder Include="Persistence\" />
     <Folder Include="Configurations\" />
-    <Folder Include="DTOs\" />
-    <Folder Include="DTOs\UserProfile\" />
     <Folder Include="Settings\" />
     <Folder Include="Middlewares\" />
   </ItemGroup>

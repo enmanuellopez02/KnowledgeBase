@@ -1,7 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using KnowledgeBase.Server.Interfaces;
 using KnowledgeBase.Server.Models;
+using KnowledgeBase.Shared.Models;
 
 namespace KnowledgeBase.Server.Services
 {
@@ -16,15 +16,17 @@ namespace KnowledgeBase.Server.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<UserProfile> CreateUserProfileAsync(UserProfile userProfile)
+        public async Task<UserProfileDetail> CreateUserProfileAsync()
         {
-            userProfile.FirstName = _identity.FirstName;
-            userProfile.LastName = _identity.LastName;
-            userProfile.Email = _identity.Email;
-            userProfile.Country = _identity.Country;
-            userProfile.City = _identity.City;
-            userProfile.UserId = _identity.UserId;
-            userProfile.CreateSince = DateTime.UtcNow;
+            var userProfile = new UserProfileDetail
+            {
+                FirstName = _identity.FirstName,
+                LastName = _identity.LastName,
+                Email = _identity.Email,
+                Country = _identity.Country,
+                City = _identity.City,
+                UserId = _identity.UserId
+            };
             
             await _unitOfWork.UserProfiles.CreateAsync(userProfile);
             await _unitOfWork.CommitChangesAsync();
@@ -32,7 +34,7 @@ namespace KnowledgeBase.Server.Services
             return userProfile;
         }
 
-        public async Task<UserProfile> GetProfileByUserIdAsync()
+        public async Task<UserProfileDetail> GetProfileByUserIdAsync()
         {
             return await _unitOfWork.UserProfiles.GetAsync(user => user.UserId == _identity.UserId);
         }

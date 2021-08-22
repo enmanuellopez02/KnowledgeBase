@@ -1,7 +1,54 @@
 ﻿@page "/articles/pending"
+@inject ILogger<Pending> Logger
+@inject HttpClient HttpClient
 
 <h3>Pending</h3>
 
-@code {
+<div class="evo-submenu-top">
+    <div class="form-group">
+        <label class="control-label">Status</label>
+        <select class="form-control" value="@status" @onchange="GetArticlesForStatus">
+            <option value="In Progress">In Progress</option>
+            <option value="Submit for review">Submit for review</option>
+            <option value="Resubmit for review">Resubmit for review</option>
+        </select>
+    </div>
+</div>
+<TableTemplate Items="articles" LoadFailed="loadFailed" Context="article">
+    <TableHeader>
+        <th>Title</th>
+        <th>Category</th>
+        <th>CreatedAt</th>
+    </TableHeader>
+    <TableRow>
+        <td>@article.Title</td>
+        <td>@article.Category.Name</td>
+        <td>@article.CreatedAt</td>
+    </TableRow>
+</TableTemplate>
 
+@code {
+    private List<Article> articles;
+    private bool loadFailed;
+    private string status = "In Progress";
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            loadFailed = false;
+            await GetArticlesForStatus(new ChangeEventArgs { Value = status });
+        }
+        catch (Exception ex)
+        {
+            loadFailed = true;
+            Logger.LogWarning(ex, "Failed to load articles pending");
+        }
+    }
+
+    protected async Task GetArticlesForStatus(ChangeEventArgs args)
+    {
+        status = args.Value.ToString();
+        articles = await HttpClient.GetFromJsonAsync<List<Article>>($"api/articles/search?status={status}");
+    }
 }

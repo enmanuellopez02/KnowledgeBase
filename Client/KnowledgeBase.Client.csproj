@@ -27,11 +27,13 @@
     <None Remove="Pages\Articles\" />
     <None Remove="Pages\Authentication\" />
     <None Remove="Infraestructure\" />
+    <None Remove="Pages\Dashboard\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\User\" />
     <Folder Include="Pages\Articles\" />
     <Folder Include="Pages\Authentication\" />
     <Folder Include="Infraestructure\" />
+    <Folder Include="Pages\Dashboard\" />
   </ItemGroup>
 </Project>

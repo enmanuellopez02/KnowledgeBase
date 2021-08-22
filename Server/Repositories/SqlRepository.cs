@@ -4,8 +4,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using KnowledgeBase.Server.Interfaces;
-using KnowledgeBase.Server.Models;
 using KnowledgeBase.Server.Persistence;
+using KnowledgeBase.Shared.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace KnowledgeBase.Server.Repositories
@@ -25,12 +25,12 @@ namespace KnowledgeBase.Server.Repositories
             return Task.CompletedTask;
         }
 
-        public async Task<IReadOnlyCollection<T>> GetAllAsync()
+        public async Task<List<T>> GetAllAsync()
         {
             return await _context.Set<T>().ToListAsync();
         }
 
-        public async Task<IReadOnlyCollection<T>> GetAllAsync(Expression<Func<T, bool>> filter)
+        public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>> filter)
         {
             return await _context.Set<T>().Where(filter).ToListAsync();
         }
@@ -45,14 +45,6 @@ namespace KnowledgeBase.Server.Repositories
             return await _context.Set<T>().SingleOrDefaultAsync(filter);
         }
 
-        public Task RemoveAsync(Guid id)
-        {
-            var entity = new T() { Id = id };
-
-            _context.Entry(entity).State = EntityState.Deleted;
-            return Task.CompletedTask;
-        }
-
         public Task UpdateAsync(T entity)
         {
             if (entity == null)
@@ -61,6 +53,14 @@ namespace KnowledgeBase.Server.Repositories
             }
 
             _context.Entry(entity).State = EntityState.Modified;
+            return Task.CompletedTask;
+        }
+
+        public Task RemoveAsync(Guid id)
+        {
+            var entity = new T() { Id = id };
+
+            _context.Entry(entity).State = EntityState.Deleted;
             return Task.CompletedTask;
         }
     }

@@ -1,10 +1,10 @@
-﻿using System;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace KnowledgeBase.Shared.Models
 {
-    public class Category
+    public class Category : Entity
     {
-        public Guid CategoryId { get; set; }
+        [Required, MaxLength(30)]
         public string Name { get; set; }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
-using KnowledgeBase.Server.DTOs.UserProfile;
 using KnowledgeBase.Server.Interfaces;
-using KnowledgeBase.Server.Models;
+using KnowledgeBase.Shared.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,10 +17,10 @@ namespace KnowledgeBase.Server.Controllers
             _userProfileService = userProfileService;
         }
 
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserProfile))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserProfileDetail))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet]
-        public async Task<ActionResult<UserProfile>> Get()
+        public async Task<ActionResult<UserProfileDetail>> Get()
         {
             var userProfile = await _userProfileService.GetProfileByUserIdAsync();
 
@@ -31,17 +30,12 @@ namespace KnowledgeBase.Server.Controllers
             return userProfile;
         }
 
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserProfile))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserProfileDetail))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost]
-        public async Task<ActionResult<UserProfile>> Post(CreateUserProfileDto createUserProfileDto)
+        public async Task<ActionResult<UserProfileDetail>> Post()
         {
-            var newEserProfile = new UserProfile
-            {
-                IsAdmin = createUserProfileDto.IsAdmin
-            };
-
-            return await _userProfileService.CreateUserProfileAsync(newEserProfile);
+            return await _userProfileService.CreateUserProfileAsync();
         }
     }
 }

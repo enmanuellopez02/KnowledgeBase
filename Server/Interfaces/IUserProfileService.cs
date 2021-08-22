@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
-using KnowledgeBase.Server.Models;
+using KnowledgeBase.Shared.Models;
 
 namespace KnowledgeBase.Server.Interfaces
 {
     public interface IUserProfileService
     {
-        Task<UserProfile> GetProfileByUserIdAsync();
-        Task<UserProfile> CreateUserProfileAsync(UserProfile userProfile);
+        Task<UserProfileDetail> CreateUserProfileAsync();
+        Task<UserProfileDetail> GetProfileByUserIdAsync();
     }
 }

@@ -1,0 +1,48 @@
+﻿@typeparam TItem
+
+@if (Items != null)
+{
+    <div class="ip-table-container">
+        <table class="table">
+            <thead>
+                <tr>
+                    @TableHeader
+                </tr>
+            </thead>
+            <tbody>
+                <Virtualize Items="@Items" Context="item">
+                    <ItemContent>
+                        <tr>
+                            @TableRow(item)
+                        </tr>
+                    </ItemContent>
+                    <Placeholder>
+                        <p>Loading&hellip;</p>
+                    </Placeholder>
+                </Virtualize>
+            </tbody>
+        </table>
+    </div>
+}
+else if (LoadFailed) 
+{
+    <div class="alert alert-danger">
+        <p><strong><i class="fal fa-times-octagon"></i>Peligro!</strong></p>
+        <span>Lo sentimos, no pudimos cargar esta información debido a un error</span>
+    </div>
+}
+else
+{
+    <p><em>Loading...</em></p>
+}
+
+@code {
+    [Parameter]
+    public RenderFragment TableHeader { get; set; }
+    [Parameter]
+    public RenderFragment<TItem> TableRow { get; set; }
+    [Parameter]
+    public IList<TItem> Items { get; set; }
+    [Parameter]
+    public bool LoadFailed { get; set; }
+}

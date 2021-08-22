@@ -53,8 +53,11 @@ namespace KnowledgeBase.Server.Extensions
 
         public static void RegisterServices(this IServiceCollection services)
         {
-            services.AddScoped<IUserProfileService, UserProfileService>();
             services.AddScoped<IStorageService, AzureBlobStorageService>();
+            services.AddScoped<IUserProfileService, UserProfileService>();
+            services.AddScoped<IArticleService, ArticleService>();
+            //services.AddScoped<ICategoryService, CategoryService>();
+            //services.AddScoped<IFeedbackService, FeedbackService>();
         }
 
         public static void AddAzureStorageSettings(this IServiceCollection services, IConfiguration configuration)
