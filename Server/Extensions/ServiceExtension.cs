@@ -56,8 +56,8 @@ namespace KnowledgeBase.Server.Extensions
             services.AddScoped<IStorageService, AzureBlobStorageService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
             services.AddScoped<IArticleService, ArticleService>();
-            //services.AddScoped<ICategoryService, CategoryService>();
-            //services.AddScoped<IFeedbackService, FeedbackService>();
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IFeedbackService, FeedbackService>();
         }
 
         public static void AddAzureStorageSettings(this IServiceCollection services, IConfiguration configuration)

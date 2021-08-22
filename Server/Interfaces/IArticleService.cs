@@ -8,8 +8,8 @@ namespace KnowledgeBase.Server.Interfaces
     public interface IArticleService
     {
         Task<Article> CreateArticleAsync(Article article);
-        Task<List<Article>> GetAllArticleAsync();
-        Task<List<Article>> GetAllArticleAsync(Func<Article, bool> filter);
+        Task<List<Article>> GetAllArticlesAsync();
+        Task<List<Article>> GetAllArticlesAsync(Func<Article, bool> filter);
         Task<Article> GetArticleByIdAsync(Guid id);
         Task UpdateArticleAsync(Article article);
         Task DeleteArticleAsync(Guid id);

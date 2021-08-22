@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace KnowledgeBase.Shared.Models
@@ -12,8 +13,9 @@ namespace KnowledgeBase.Shared.Models
         public string Email { get; set; }
         public string Country { get; set; }
         public string City { get; set; }
-        public Guid UserId { get; set; }
         public bool IsAdmin { get; set; }
+
+        [DataType(DataType.Date)]
         public DateTime CreateSince { get; set; }
 
         [JsonIgnore]

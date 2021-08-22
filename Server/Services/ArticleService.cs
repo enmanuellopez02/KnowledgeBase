@@ -35,15 +35,25 @@ namespace KnowledgeBase.Server.Services
             await _unitOfWork.CommitChangesAsync();
         }
 
-        public async Task<List<Article>> GetAllArticleAsync()
+        public async Task<List<Article>> GetAllArticlesAsync()
         {
             return await _unitOfWork.Articles.GetAllAsync();
         }
 
-        public async Task<List<Article>> GetAllArticleAsync(Func<Article, bool> filter)
+        public async Task<List<Article>> GetAllArticlesAsync(Func<Article, bool> filter)
         {
-            var articles = await GetAllArticleAsync();
-            return articles.Where(filter).ToList();
+            var articles = await GetAllArticlesAsync();
+            articles = articles.Where(filter).ToList();
+
+            var categories = await _unitOfWork.Categories.GetAllAsync();
+
+            articles = articles.Select(article =>
+            {
+                article.Category = categories.FirstOrDefault(category => category.Id == article.CategoryId);
+                return article;
+            }).ToList();
+
+            return articles;
         }
 
         public async Task<Article> GetArticleByIdAsync(Guid id)

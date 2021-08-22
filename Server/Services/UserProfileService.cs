@@ -20,12 +20,12 @@ namespace KnowledgeBase.Server.Services
         {
             var userProfile = new UserProfileDetail
             {
+                Id = _identity.UserId,
                 FirstName = _identity.FirstName,
                 LastName = _identity.LastName,
                 Email = _identity.Email,
                 Country = _identity.Country,
                 City = _identity.City,
-                UserId = _identity.UserId
             };
             
             await _unitOfWork.UserProfiles.CreateAsync(userProfile);
@@ -36,7 +36,7 @@ namespace KnowledgeBase.Server.Services
 
         public async Task<UserProfileDetail> GetProfileByUserIdAsync()
         {
-            return await _unitOfWork.UserProfiles.GetAsync(user => user.UserId == _identity.UserId);
+            return await _unitOfWork.UserProfiles.GetAsync(user => user.Id == _identity.UserId);
         }
     }
 }

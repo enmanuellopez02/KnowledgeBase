@@ -1,7 +1,70 @@
 ﻿@page "/user/profile"
+@inject ILogger<Profile> _logger
+@inject HttpClient _httpClient
 
 <h3>Profile</h3>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <EditForm Model="@userProfileDetail">
+            <div class="form-group">
+                <label class="control-label">First Name</label>
+                <InputText class="form-control" @bind-Value="userProfileDetail.FirstName" disabled="@disabled" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Last Name</label>
+                <InputText class="form-control" @bind-Value="userProfileDetail.LastName" disabled="@disabled" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Email</label>
+                <InputText class="form-control" @bind-Value="userProfileDetail.Email" disabled="@disabled" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Country</label>
+                <InputText class="form-control" @bind-Value="userProfileDetail.Country" disabled="@disabled" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">City</label>
+                <InputText class="form-control" @bind-Value="userProfileDetail.City" disabled="@disabled" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Create Since</label>
+                <InputDate class="form-control" @bind-Value="userProfileDetail.CreateSince" disabled="@disabled" />
+            </div>
+        </EditForm>
 
+        @if (userProfileDetail.IsAdmin)
+        {
+            <div class="form-group">
+                <a href="/suscription/delete" class="btn btn-danger">cancel suscription</a>
+            </div>
+        }
+        else
+        {
+            <div class="form-group">
+                <a href="/suscription/create" class="btn btn-primary">Add suscription</a>
+            </div>
+        }
+    </div>
+</div>
 @code {
+    private UserProfileDetail userProfileDetail = new();
+    private bool disabled = true;
 
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            await GetUserProfileDetail();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogWarning(ex, "Failed to load articles pending");
+        }
+    }
+
+    protected async Task GetUserProfileDetail()
+    {
+        userProfileDetail = await _httpClient.GetFromJsonAsync<UserProfileDetail>("api/userprofiles");
+    }
 }

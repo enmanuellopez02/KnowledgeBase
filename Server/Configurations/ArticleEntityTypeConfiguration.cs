@@ -12,9 +12,10 @@ namespace KnowledgeBase.Server.Configurations
             builder.Property(a => a.Title).IsRequired();
             builder.Property(a => a.Body).IsRequired();
             builder.Property(a => a.Status).IsRequired();
-            builder.Property(a => a.CreatedAt).HasDefaultValue(DateTime.UtcNow);
             builder.Property(a => a.CategoryId).IsRequired();
             builder.Property(a => a.UserProfileDetailId).IsRequired();
+            builder.Property(a => a.CreatedAt).HasDefaultValue(DateTime.UtcNow);
+            builder.Ignore(a => a.CategoryIdAsString);
         }
     }
 }

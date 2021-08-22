@@ -17,11 +17,14 @@ namespace KnowledgeBase.Shared.Models
         [Required]
         public string Status { get; set; }
 
-        [Display(Name = "Created at")]
+        [DataType(DataType.Date)]
         public DateTime CreatedAt { get; set; }
+
+        [DataType(DataType.Date)]
         public DateTime UpdatedAt { get; set; }
+
         public string FileName { get; set; }
-        public string Url => Path.Combine("Storage", "Documentation", FileName);
+        public string Url => Path.Combine("Storage", "Documentation", FileName ?? "");
 
         [Required, Display(Name = "Category")]
         public string CategoryIdAsString { get; set; }
