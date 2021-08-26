@@ -1,0 +1,94 @@
+﻿@page "/articles/pending/details/{Id:guid}"
+@inject ILogger<PendingDetails> _logger
+@inject HttpClient _httpClient
+@inject NavigationManager _navigationManager
+
+<h3>Add new article</h3>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <EditForm Model="@article" OnValidSubmit="@HandleValidSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="form-group">
+                <label class="control-label">Category</label>
+                <InputSelect id="tb_category" class="form-control" @bind-Value="article.CategoryIdAsString" disabled="@disabled">
+                    <option value="" hidden>-select category-</option>
+                    @foreach (var category in categories)
+                    {
+                        <option value="@category.Id">@category.Name</option>
+                    }
+                </InputSelect>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Title</label>
+                <InputText id="tb_title" class="form-control" @bind-Value="article.Title" disabled="@disabled" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Article</label>
+                <InputText id="tb_body" class="form-control" @bind-Value="article.Body" disabled="@disabled" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Status</label>
+                <InputSelect id="tb_status" class="form-control" @bind-Value="article.Status" disabled="@disabled">
+                    <option value="" hidden>-select status-</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Submit for review">Submit for review</option>
+                </InputSelect>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </EditForm>
+        <p class="@messageCss">@message</p>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public Guid Id { get; set; }
+    private Article article = new();
+    private List<Category> categories = new();
+    private bool disabled;
+    private string message;
+    private string messageCss;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetCategoriesAsync();
+        await GetArticleByIdAsync();
+    }
+
+    protected async Task GetCategoriesAsync()
+    {
+        categories = await _httpClient.GetFromJsonAsync<List<Category>>("api/categories");
+    }
+
+    protected async Task GetArticleByIdAsync()
+    {
+        article = await _httpClient.GetFromJsonAsync<Article>($"api/articles/{Id}");
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        try
+        {
+            disabled = true;
+            messageCss = "valid-message";
+            message = "the form has been processed";
+
+            var response = await _httpClient.PutAsJsonAsync<Article>($"api/articles/{Id}", article);
+            if (response.IsSuccessStatusCode)
+            {
+                _navigationManager.NavigateTo("/articles/pending");
+            }
+        }
+        catch
+        {
+            disabled = false;
+            messageCss = "invalid-message";
+            message = "there was an error processing the form";
+            _logger.LogWarning("Failed to process form");
+        }
+    }
+}

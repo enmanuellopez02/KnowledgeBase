@@ -19,11 +19,13 @@
         <th>Title</th>
         <th>Category</th>
         <th>Created at</th>
+        <th></th>
     </TableHeader>
     <TableRow>
         <td>@article.Title</td>
         <td>@article.Category?.Name</td>
-        <td>@article.CreatedAt</td>
+        <td>@article.CreatedAt.ToShortDateString()</td>
+        <td><a href="/articles/pending/details/@article.Id" class="">View details</a></td>
     </TableRow>
 </TableTemplate>
 

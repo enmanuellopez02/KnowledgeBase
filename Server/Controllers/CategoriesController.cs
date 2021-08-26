@@ -21,7 +21,7 @@ namespace KnowledgeBase.Server.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Category>))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet]
-        public async Task<ActionResult<List<Category>>> Get()
+        public async Task<ActionResult<List<Category>>> GetCategories()
         {
             return await _categoryService.GetAllCategoriesAsync();
         }

@@ -58,6 +58,7 @@ namespace KnowledgeBase.Server.Extensions
             services.AddScoped<IArticleService, ArticleService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IFeedbackService, FeedbackService>();
+            services.AddScoped<IDashboardService, DashboardService>();
         }
 
         public static void AddAzureStorageSettings(this IServiceCollection services, IConfiguration configuration)

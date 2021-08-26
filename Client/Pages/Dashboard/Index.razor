@@ -1,5 +1,7 @@
 ﻿@page "/"
 @using ChartJs.Blazor.PieChart
+@inject ILogger<Index> _logger
+@inject HttpClient _httpClient
 
 <section class="evo-dash-container">
     <div class="evo-row-flex evo-dash-overview">
@@ -11,7 +13,7 @@
             </div>
             <div class="evo-dash-box-midle">
                 <div class="evo-dash-box-title">In Progress</div>
-                <div class="evo-dash-box-count">0</div>
+                <div class="evo-dash-box-count">@dashboard.InProgress</div>
             </div>
         </div>
         <div class="evo-dash-box">
@@ -22,7 +24,7 @@
             </div>
             <div class="evo-dash-box-midle">
                 <div class="evo-dash-box-title">Pending</div>
-                <div class="evo-dash-box-count">0</div>
+                <div class="evo-dash-box-count">@dashboard.Pending</div>
             </div>
         </div>
         <div class="evo-dash-box">
@@ -33,7 +35,7 @@
             </div>
             <div class="evo-dash-box-midle">
                 <div class="evo-dash-box-title">Resubmit</div>
-                <div class="evo-dash-box-count">0</div>
+                <div class="evo-dash-box-count">@dashboard.Resumit</div>
             </div>
         </div>
         <div class="evo-dash-box">
@@ -44,7 +46,7 @@
             </div>
             <div class="evo-dash-box-midle">
                 <div class="evo-dash-box-title">Published</div>
-                <div class="evo-dash-box-count">0</div>
+                <div class="evo-dash-box-count">@dashboard.Published</div>
             </div>
         </div>
         <div class="evo-dash-box">
@@ -55,7 +57,7 @@
             </div>
             <div class="evo-dash-box-midle">
                 <div class="evo-dash-box-title">Unpublished</div>
-                <div class="evo-dash-box-count">0</div>
+                <div class="evo-dash-box-count">@dashboard.Unpublished</div>
             </div>
         </div>
         <div class="evo-dash-box">
@@ -66,7 +68,7 @@
             </div>
             <div class="evo-dash-box-midle">
                 <div class="evo-dash-box-title">Feedback</div>
-                <div class="evo-dash-box-count">0</div>
+                <div class="evo-dash-box-count">@dashboard.Feedback</div>
             </div>
         </div>
     </div>
@@ -107,9 +109,10 @@
 </section>
 
 @code {
+    private Dashboard dashboard = new();
     private PieConfig _config;
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
         _config = new PieConfig
         {
@@ -136,5 +139,11 @@
         };
 
         _config.Data.Datasets.Add(dataset);
+        await GetDashboardAsync();
+    }
+
+    protected async Task GetDashboardAsync()
+    {
+        dashboard = await _httpClient.GetFromJsonAsync<Dashboard>($"api/dashboard");
     }
 }
