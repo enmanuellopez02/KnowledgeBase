@@ -3,7 +3,7 @@
 @inject HttpClient _httpClient
 @inject NavigationManager _navigationManager
 
-<h3>Add new article</h3>
+<h3>Article details</h3>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -37,7 +37,16 @@
                 </InputSelect>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <label class="control-label">Created at</label>
+                <p>@article.CreatedAt.ToShortDateString()</p>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Updated at</label>
+                <p>@article.UpdatedAt.ToShortDateString()</p>
+            </div>
+            <div class="form-group">
+                <a href="/articles/pending" class="btn btn-light">Back</a>
+                <button type="submit" class="btn btn-primary">Update</button>
             </div>
         </EditForm>
         <p class="@messageCss">@message</p>

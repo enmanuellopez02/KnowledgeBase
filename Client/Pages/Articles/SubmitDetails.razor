@@ -1,0 +1,50 @@
+﻿@page "/articles/submit/details/{Id:guid}"
+@inject ILogger<SubmitDetails> _logger
+@inject HttpClient _httpClient
+@inject NavigationManager _navigationManager
+
+<h3>Article details</h3>
+<hr />
+<dl class="row">
+    <dt class="col-sm-2">Title</dt>
+    <dd class="col-sm-10">@article.Title</dd>
+
+    <dt class="col-sm-2">Article</dt>
+    <dd class="col-sm-10">@article.Body</dd>
+
+    <dt class="col-sm-2">Category</dt>
+    <dd class="col-sm-10">@categories.Find(category => category.Id == article.CategoryId)?.Name</dd>
+
+    <dt class="col-sm-2">Create at</dt>
+    <dd class="col-sm-10">@article.CreatedAt.ToShortDateString()</dd>
+
+    <dt class="col-sm-2">Update at</dt>
+    <dd class="col-sm-10">@article.UpdatedAt.ToShortDateString()</dd>
+</dl>
+
+<div class="form-group">
+    <a href="/articles/pending" class="btn btn-light">Back</a>
+</div>
+
+@code {
+    [Parameter]
+    public Guid Id { get; set; }
+    private Article article = new();
+    private List<Category> categories = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetCategoriesAsync();
+        await GetArticleByIdAsync();
+    }
+
+    protected async Task GetCategoriesAsync()
+    {
+        categories = await _httpClient.GetFromJsonAsync<List<Category>>("api/categories");
+    }
+
+    protected async Task GetArticleByIdAsync()
+    {
+        article = await _httpClient.GetFromJsonAsync<Article>($"api/articles/{Id}");
+    }
+}

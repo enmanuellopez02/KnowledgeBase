@@ -25,7 +25,7 @@
         <td>@article.Title</td>
         <td>@article.Category?.Name</td>
         <td>@article.CreatedAt.ToShortDateString()</td>
-        <td><a href="/articles/pending/details/@article.Id" class="">View details</a></td>
+        <td><a href="@viewDetailsUrl/@article.Id" class="">View details</a></td>
     </TableRow>
 </TableTemplate>
 
@@ -33,6 +33,7 @@
     private List<Article> articles = new();
     private bool loadFailed;
     private string status = "In Progress";
+    private string viewDetailsUrl;
 
     protected override async Task OnInitializedAsync()
     {
@@ -52,5 +53,21 @@
     {
         status = args.Value.ToString();
         articles = await _httpClient.GetFromJsonAsync<List<Article>>($"api/articles/search?status={status}");
+
+        switch (status)
+        {
+            case "In Progress":
+                viewDetailsUrl = "/articles/pending/details";
+                break;
+            case "Submit for review":
+                viewDetailsUrl = "/articles/submit/details";
+                break;
+            case "Resubmit for review":
+                viewDetailsUrl = "/articles/resubmit/details";
+                break;
+            default:
+                viewDetailsUrl = string.Empty;
+                break;
+        }
     }
 }
