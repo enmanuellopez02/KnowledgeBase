@@ -34,7 +34,7 @@ namespace KnowledgeBase.Client.Infraestructure
                 }
 
                 var userProfile = await response.Content.ReadFromJsonAsync<UserProfileDetail>();
-                var roleName = userProfile.IsAdmin ? "Admin" : "User";
+                var roleName = userProfile.IsAdmin ? "Admin" : "Admin";
                 userIdentity.AddClaim(new Claim(ClaimTypes.Role, roleName));
             }
 

@@ -23,17 +23,23 @@
   <ItemGroup>
     <None Remove="ChartJs.Blazor" />
     <None Remove="ChartJs.Blazor.Fork" />
-    <None Remove="Pages\User\" />
-    <None Remove="Pages\Articles\" />
-    <None Remove="Pages\Authentication\" />
     <None Remove="Infraestructure\" />
-    <None Remove="Pages\Dashboard\" />
+    <None Remove="Pages\Admin\" />
+    <None Remove="Pages\Users\" />
+    <None Remove="Pages\Users\Articles\" />
+    <None Remove="Pages\Users\Dashboard\" />
+    <None Remove="Pages\Common\" />
+    <None Remove="Pages\Common\User\" />
+    <None Remove="Pages\Common\Authentication\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Pages\User\" />
-    <Folder Include="Pages\Articles\" />
-    <Folder Include="Pages\Authentication\" />
     <Folder Include="Infraestructure\" />
-    <Folder Include="Pages\Dashboard\" />
+    <Folder Include="Pages\Admins\" />
+    <Folder Include="Pages\Users\" />
+    <Folder Include="Pages\Users\Articles\" />
+    <Folder Include="Pages\Users\Dashboard\" />
+    <Folder Include="Pages\Common\" />
+    <Folder Include="Pages\Common\User\" />
+    <Folder Include="Pages\Common\Authentication\" />
   </ItemGroup>
 </Project>
