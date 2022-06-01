@@ -18,49 +18,10 @@ namespace KnowledgeBase.Server.Repositories
             _context = context;
         }
 
-        public IRepository<UserProfileDetail> UserProfiles
-        {
-            get
-            {
-                if(_userProfiles == null)
-                    _userProfiles = new SqlRepository<UserProfileDetail>(_context);
-
-                return _userProfiles;
-            }
-        }
-
-        public IRepository<Article> Articles
-        {
-            get
-            {
-                if (_articles == null)
-                    _articles = new SqlRepository<Article>(_context);
-
-                return _articles;
-            }
-        }
-
-        public IRepository<Category> Categories
-        {
-            get
-            {
-                if (_categories == null)
-                    _categories = new SqlRepository<Category>(_context);
-
-                return _categories;
-            }
-        }
-
-        public IRepository<Feedback> Feedbacks
-        {
-            get
-            {
-                if (_feedbacks == null)
-                    _feedbacks = new SqlRepository<Feedback>(_context);
-
-                return _feedbacks;
-            }
-        }
+        public IRepository<UserProfileDetail> UserProfiles => _userProfiles ??= new SqlRepository<UserProfileDetail>(_context);
+        public IRepository<Article> Articles => _articles ??= new SqlRepository<Article>(_context);
+        public IRepository<Category> Categories => _categories ??= new SqlRepository<Category>(_context);
+        public IRepository<Feedback> Feedbacks => _feedbacks ??= new SqlRepository<Feedback>(_context);
 
         public async Task CommitChangesAsync()
         {
